@@ -1,7 +1,5 @@
 import random, string
 
-from numpy import short
-
 def short_link(dom="jebacpis.com", _range=13, _char=string.ascii_letters + string.digits):
     return dom +'/' + ''.join(random.SystemRandom().choice(_char) for _ in range(_range)) + '/'
 

@@ -3,11 +3,13 @@ from uuid import uuid4
 
 from sqlalchemy.orm import sessionmaker
 
-import model, db
-from .short_link import short_link
+import model, db, short_link
 
 Session = sessionmaker(db.engine)
 session = Session()
+
+id : str = 'jazda'
+print(id)
 
 class Tasks:
     def get_all(self):
@@ -29,7 +31,7 @@ class Tasks:
             session.refresh(link)
             return link
     
-    def del_by_id(self, id):
+    def del_by_id(self, id: int):
         with session:
             links = session.query(model.Links).filter(model.Links.id == id).first()
             session.delete(links)
@@ -43,16 +45,17 @@ class Service(Tasks):
     def get_link_by_id(self, _id):
         return self.get_by_id(_id)
 
-    def create_link(self, long_link, short_link, ):
+    def create_link(self, long_link):
         uuid = uuid4()
-        sh = short_link()
+        short_link = short_link.short_link()
         return self.add(uuid, long_link, short_link, date = datetime.now())
 
-    def delete_link_by_id(self, user_id: int) -> None:
-        return self.del_by_id(user_id)
+    def delete_link_by_id(self, link_id) -> None:
+        return self.del_by_id(link_id)
 
 
-if __name__ == '__main__'
+if __name__ == '__main__':
     a = Tasks()
-    a.add(1, 'sdadsada','sdasdasd')
+    a.add(1, '111111','sdasdasd')
+    a.add(2, 'dsafasfasf','sdassfdsagffs')
     print(a.get_all())
