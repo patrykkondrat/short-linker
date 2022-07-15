@@ -10,9 +10,6 @@ Session = sessionmaker(db.engine)
 session = Session()
 
 class Tasks:
-    # def __init__():
-    #     pass
-
     def get_all(self):
         with session:
             return session.query(model.Links).all()
@@ -40,18 +37,18 @@ class Tasks:
 
 #to revision
 class Service(Tasks):
-    def get_users(self) -> Iterator[User]:
+    def get_links(self):
         return self.get_all()
 
-    def get_user_by_id(self, user_id: int) -> User:
-        return self.get_by_id(user_id)
+    def get_link_by_id(self, _id):
+        return self.get_by_id(_id)
 
-    def create_link(self, short_link) -> User:
+    def create_link(self, long_link, short_link, ):
         uuid = uuid4()
-
+        sh = short_link()
         return self.add(uuid, long_link, short_link, date = datetime.now())
 
-    def delete_user_by_id(self, user_id: int) -> None:
+    def delete_link_by_id(self, user_id: int) -> None:
         return self.del_by_id(user_id)
 
 
