@@ -1,28 +1,35 @@
-from xml.etree.ElementInclude import include
-from fastapi import APIRouter, Depends, Response, status
-from dependency_injector.wiring import inject, Provide
-
-from .services import Service
+from fastapi import APIRouter, Response, status
+from dependency_injector.wiring import inject
+from services import NotFoundId, Service, NotFoundId
 
 
 router = APIRouter()
 
+Service = Service()
 
-@router.get('/get/all/')
-@include
+@router.get("/get/all")
+@inject
 async def get_them_all():
     return Service.get_links()
 
 
-@router.get(f'/get/{_id}')
-@include
-async def get_by_id(_id: int):
-    try:
-        return Service.get_link_by_id()
-    except IdFoundInDatabase:
-        return Response(status_code=status.HTTP_404_NOT_FOUND)
+@router.get("/get/{id}")
+@inject
+async def get_by_id(id: int):
+    return Service.get_link_by_id(id)
 
 
-@router.post(f'post/{id}/{long_link}')
-@include
+@router.post("post/{id}/{long_link}")
+@inject
 async def do_something(id, long_link):
+    return Service.create_link(id,long_link)
+
+
+@router.delete("del/{id}")
+@inject
+async def remove(id):
+    Service.delete_link_by_id(id)
+
+@router.get("/status")
+async def status():
+    return {"status": "GIT"}
