@@ -1,6 +1,6 @@
 import random, string
 
-def short_link(dom="jebacpis.com", _range=13, _char=string.ascii_letters + string.digits):
+def short_link(dom : str="jebacpis.com", _range : int=13, _char : str=string.ascii_letters + string.digits):
     return dom +'/' + ''.join(random.SystemRandom().choice(_char) for _ in range(_range)) + '/'
 
 
