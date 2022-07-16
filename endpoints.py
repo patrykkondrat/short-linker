@@ -22,13 +22,13 @@ async def get_by_id(id: int):
         return Response(status_code=status.HTTP_404_NOT_FOUND)
 
 
-@router.post("post/{id}/{long_link}")
+@router.post("/post/{id}/{long_link}")
 @inject
 async def do_something(id: int, long_link: str):
     return service.create_link(id, long_link)
 
 
-@router.delete("del/{id}")
+@router.delete("/del/{id}")
 @inject
 async def remove(id: int):
     try:

@@ -17,14 +17,14 @@ class Tasks:
         with session:
             linker = session.query(model.Links).filter(model.Links.id == id).first()
             if not linker:
-                raise IdNotFoundInDatabase(id)
+                raise IdNotFoundInDatabase
             return linker
 
     def add(self, id: int, short: str, long: str, date = datetime.now(), views=1):
         with session:
             link = model.Links(id=id, long_link=long, short_link=short, date=date, views=views)
             if not link:
-                raise IdFoundInDatabase
+                raise IdNotFoundInDatabase
             session.add(link)
             session.commit()
             session.refresh(link)
@@ -55,9 +55,8 @@ class Service(Tasks):
 
 class IdNotFoundInDatabase(Exception):
 
-    id: int
     def __init__(self):
-        super().__init__(f"Id {self.id} is not in database.")
+        super().__init__(f"Id is not in database.")
 
 if __name__ == '__main__':
     # Task interview
