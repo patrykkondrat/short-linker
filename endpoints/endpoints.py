@@ -10,7 +10,7 @@ router = APIRouter()
 
 service = Service()
 
-@router.get("/get/all")
+@router.get("/get")
 @inject
 async def get_them_all():
     return service.get_links()
