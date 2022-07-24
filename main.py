@@ -1,8 +1,8 @@
 
 from fastapi import FastAPI
 
-import endpoints
-import redirect
+import endpoints.endpoints as endpoints
+import endpoints.redirect as redirect
 
 
 app = FastAPI()

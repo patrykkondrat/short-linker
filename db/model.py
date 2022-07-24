@@ -1,8 +1,8 @@
 from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.orm import sessionmaker, declarative_base
-import db
+import db.db
 
-class Links(db.base):
+class Links(db.db.base):
     __tablename__ = "links"
 
     id = Column(Integer, primary_key=True)
@@ -18,4 +18,4 @@ class Links(db.base):
         date: {self.date} ; \n \
         views: {self.views}" 
 
-db.base.metadata.create_all()
+db.db.base.metadata.create_all()

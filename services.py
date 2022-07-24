@@ -3,9 +3,9 @@ from typing import Iterator
 
 from sqlalchemy.orm import sessionmaker
 
-import model, db, short_link
+import db.model as model, db.db, short_link
 
-Session = sessionmaker(db.engine)
+Session = sessionmaker(db.db.engine)
 session = Session()
 
 class Tasks:
@@ -57,7 +57,7 @@ class Service(Tasks):
         short_links = short_link.short_link()
         return self.add(id, long_link, short_links, date = datetime.now(), views=1)
 
-    def delete_link_by_id(self, link_id: int) -> None:
+    def delete_link_by_id(self, link_id: int):
         return self.del_by_id(link_id)
 
 class IdNotFoundInDatabase(Exception):

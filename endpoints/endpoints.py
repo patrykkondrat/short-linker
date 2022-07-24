@@ -1,8 +1,10 @@
+import sys, os
+sys.path.append(os.getcwd())
 from fastapi import APIRouter, Response, status
 from dependency_injector.wiring import inject
 from services import IdNotFoundInDatabase, Service
 from fastapi.responses import RedirectResponse
-
+from services import Service
 
 router = APIRouter()
 
@@ -34,6 +36,7 @@ async def do_something(id: int, long_link: str):
 async def remove(id: int):
     try:
         service.delete_link_by_id(id)
+        return {'del': id}
     except IdNotFoundInDatabase:
         return Response(status_code=status.HTTP_404_NOT_FOUND)
     else:
@@ -45,6 +48,6 @@ async def _status():
     return {"status": "GIT"}
 
 
-@router.get("/fastapi", response_class=RedirectResponse)
+@router.get("/redirect-test", response_class=RedirectResponse)
 async def redirect_fastapi():
     return RedirectResponse("https://www.facebook.com")
