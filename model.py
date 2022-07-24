@@ -17,5 +17,5 @@ class Links(db.base):
         short link: {self.short_link} ; \n \
         date: {self.date} ; \n \
         views: {self.views}" 
-    
+
 db.base.metadata.create_all()

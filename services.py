@@ -19,8 +19,15 @@ class Tasks:
             if not linker:
                 raise IdNotFoundInDatabase
             return linker
+    
+    def short2long(self, short_link: str):
+        with session:
+            linker = session.query(model.Links).filter(model.Links.id == id).first()
+            if not linker:
+                raise IdNotFoundInDatabase
+            return linker
 
-    def add(self, id: int, short: str, long: str, date = datetime.now(), views=1):
+    def add(self, id: int, long: str, short: str, date = datetime.now(), views=1):
         with session:
             link = model.Links(id=id, long_link=long, short_link=short, date=date, views=views)
             if not link:

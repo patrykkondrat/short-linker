@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Response, status
 from dependency_injector.wiring import inject
 from services import IdNotFoundInDatabase, Service
+from fastapi.responses import RedirectResponse
 
 
 router = APIRouter()
@@ -44,3 +45,6 @@ async def _status():
     return {"status": "GIT"}
 
 
+@router.get("/fastapi", response_class=RedirectResponse)
+async def redirect_fastapi():
+    return RedirectResponse("https://www.facebook.com")
