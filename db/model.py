@@ -1,6 +1,7 @@
-from sqlalchemy import Column, String, Integer, DateTime
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy import Column, String, Integer
+
 import db.db
+
 
 class Links(db.db.base):
     __tablename__ = "links"
@@ -16,6 +17,7 @@ class Links(db.db.base):
         long link: {self.long_link} ; \n \
         short link: {self.short_link} ; \n \
         date: {self.date} ; \n \
-        views: {self.views}" 
+        views: {self.views}"
+
 
 db.db.base.metadata.create_all()

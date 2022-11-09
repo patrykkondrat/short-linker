@@ -1,11 +1,14 @@
+import os
+import sys
 
 from fastapi import FastAPI
 
-import endpoints.endpoints as endpoints
-import endpoints.redirect as redirect
+sys.path.append("/home/patryk/programowanko/python/short-linker/endpoints")
+
+import endpoints.redirect
+import endpoints.db_service
 
 
 app = FastAPI()
-app.include_router(router=endpoints.router)
-app.include_router(router=redirect.router2)
-
+app.include_router(router=endpoints.db_service.router)
+app.include_router(router=endpoints.redirect.router2)

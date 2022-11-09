@@ -1,4 +1,7 @@
+dependency_injector
+validators
 fastapi
+docker
 sqlalchemy
 dependency_injector
 uvicorn

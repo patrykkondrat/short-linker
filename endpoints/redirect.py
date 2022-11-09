@@ -1,9 +1,13 @@
-from fastapi import APIRouter, Response, status
+from fastapi import APIRouter
 from dependency_injector.wiring import inject
-from services import IdNotFoundInDatabase, Service
 from fastapi.responses import RedirectResponse
 
+from service import services
 
-@router.get("/redirect-test", response_class=RedirectResponse)
-async def redirect_fastapi():
-    return RedirectResponse("https://www.facebook.com")
+router2 = APIRouter()
+serv = services.Service()
+@router2.get("/{id}", response_class=RedirectResponse)
+@inject
+async def redirect_fastapi(id):
+    redirect_link = serv.get_by_id(id)
+    return RedirectResponse(redirect_link.long_link, status_code=301)
